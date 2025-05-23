@@ -41,7 +41,18 @@ Masalah ini dapat didekati melalui penerapan Machine Learning (ML) yang mampu me
 ### URL/tautan sumber data
 Dataset digunakan berisi data pasien lansia dan berbagai atribut klinis serta gaya hidup. Dataset ini dimuat dalam format CSV dan datasetnya diambil dari sumber kaggle: [**Link Alzheimer Dataset**](https://www.kaggle.com/datasets/rabieelkharoua/alzheimers-disease-dataset)
 
+### Dataset Awal
+- Jumlah Entri: 16.714 baris
+- Jumlah Kolom: 35 (10 fitur numerik + 1 target)
+- Tidak Ada Nilai Kosong: Semua kolom lengkap tanpa missing values
+- Duplikat: semua kolom tidak memiliki duplikat data
+- Outlier: Semua fitur tidak memiliki outlier
+- Tipe Data:
+- float64: 12 kolom (semua fitur)
+- int64 : 12 kolom (11 fitur + 1target)
+- object: 1 kolom (DoctorInCharge)
 ### Variabel-variabel:
+- PatientID: Identifikasi unik yang diberikan kepada setiap pasien (4751 hingga 6900).
 - **`Age`**: Umur pasien
 - **`Gender`**: Jenis kelamin
 - **`Education Level`**: Tingkat pendidikan
@@ -50,11 +61,54 @@ Dataset digunakan berisi data pasien lansia dan berbagai atribut klinis serta ga
 - **`Alcohol Consumption`**: Konsumsi alkohol
 - **`Sleep Quality`**: Kualitas tidur
 - **`Physical Activity`**: Aktivitas fisik
-- **`Diet`**: Pola makan
-- **`Comorbidities`**: Penyakit penyerta
-- **`Cognitive Decline`**: Tingkat penurunan kognitif
-- **`Independence Level`**: Tingkat kemandirian
-- **`Diagnosis`**: Label target (Alzheimer / Tidak)
+FamilyHistoryAlzheimers: Riwayat keluarga terhadap penyakit Alzheimer, di mana 0 berarti Tidak dan 1 berarti Ya.
+
+CardiovascularDisease: Kehadiran penyakit kardiovaskular, 0 berarti Tidak dan 1 berarti Ya.
+
+Diabetes: Kehadiran penyakit diabetes, 0 berarti Tidak dan 1 berarti Ya.
+
+Depression: Kehadiran depresi, 0 berarti Tidak dan 1 berarti Ya.
+
+HeadInjury: Riwayat cedera kepala, 0 berarti Tidak dan 1 berarti Ya.
+
+Hypertension: Kehadiran hipertensi, 0 berarti Tidak dan 1 berarti Ya.
+SystolicBP: Tekanan darah sistolik, berkisar antara 90 hingga 180 mmHg.
+
+DiastolicBP: Tekanan darah diastolik, berkisar antara 60 hingga 120 mmHg.
+
+CholesterolTotal: Kadar kolesterol total, berkisar antara 150 hingga 300 mg/dL.
+
+CholesterolLDL: Kadar kolesterol LDL (low-density lipoprotein), berkisar antara 50 hingga 200 mg/dL.
+
+CholesterolHDL: Kadar kolesterol HDL (high-density lipoprotein), berkisar antara 20 hingga 100 mg/dL.
+
+CholesterolTriglycerides: Kadar trigliserida, berkisar antara 50 hingga 400 mg/dL.
+MMSE: Skor Pemeriksaan Mental Mini (Mini-Mental State Examination), berkisar antara 0 hingga 30. Skor lebih rendah menunjukkan gangguan kognitif.
+
+FunctionalAssessment: Skor penilaian fungsional, berkisar antara 0 hingga 10. Skor lebih rendah menunjukkan gangguan yang lebih berat.
+
+MemoryComplaints: Keluhan terhadap daya ingat, 0 berarti Tidak dan 1 berarti Ya.
+
+BehavioralProblems: Masalah perilaku, 0 berarti Tidak dan 1 berarti Ya.
+
+ADL: Skor aktivitas kehidupan sehari-hari (Activities of Daily Living), berkisar antara 0 hingga 10. Skor lebih rendah menunjukkan gangguan yang lebih berat.
+Confusion: Kehadiran kebingungan, 0 berarti Tidak dan 1 berarti Ya.
+
+Disorientation: Kehadiran disorientasi, 0 berarti Tidak dan 1 berarti Ya.
+
+PersonalityChanges: Perubahan kepribadian, 0 berarti Tidak dan 1 berarti Ya.
+
+DifficultyCompletingTasks: Kesulitan dalam menyelesaikan tugas, 0 berarti Tidak dan 1 berarti Ya.
+
+Forgetfulness: Pelupa, 0 berarti Tidak dan 1 berarti Ya.
+Diagnosis: Status diagnosis penyakit Alzheimer, 0 berarti Tidak dan 1 berarti Ya.
+DoctorInCharge: Kolom ini berisi informasi rahasia tentang dokter yang menangani, dengan nilai "XXXConfid" untuk semua pasien.
+
+
+
+
+
+
 
 ---
 ### Exploratory Data Analysis (EDA)
