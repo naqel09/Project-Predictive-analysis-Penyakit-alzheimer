@@ -1,6 +1,7 @@
 # Laporan Proyek Machine Learning - Andry Septian Syahputra Tumaruk
 ---
 ## Domain Proyek
+
 Proyek ini berada dalam domain kesehatan, dengan fokus utama pada deteksi dini penyakit Alzheimer menggunakan pendekatan Machine Learning. Alzheimer adalah penyakit neurodegeneratif yang menyebabkan gangguan memori, kemampuan berpikir, dan perilaku. Seiring perkembangan penyakit, penderita menjadi tidak mampu melakukan aktivitas sehari-hari secara mandiri, yang berdampak besar pada kualitas hidup penderita dan beban keluarga serta tenaga medis.
 
 **Mengapa Masalah Ini Harus Diselesaikan**
@@ -95,20 +96,20 @@ Dataset digunakan berisi data pasien lansia dan berbagai atribut klinis serta ga
 ---
 ## Data Preparation
 ### 1. Handling Missing Values
-Berdasarkan hasil pemeriksaan menggunakan `df.isnull().sum()`, tidak ditemukan nilai yang hilang pada dataset. Oleh karena itu, tidak dilakukan proses imputasi atau penghapusan missing value.
+- Berdasarkan hasil pemeriksaan menggunakan `df.isnull().sum()`, tidak ditemukan nilai yang hilang pada dataset. Oleh karena itu, tidak dilakukan proses imputasi atau penghapusan missing value.
 ### 2. Handling Duplicate Data
-Jumlah data yang duplikat diperiksa menggunakan `df.duplicated().sum()`. Tidak ditemukan data duplikat, sehingga tidak dilakukan penghapusan data ganda.
+- Jumlah data yang duplikat diperiksa menggunakan `df.duplicated().sum()`. Tidak ditemukan data duplikat, sehingga tidak dilakukan penghapusan data ganda.
 ### 3. Penghapusan Kolom Tidak Relevan
-Kolom `PatientID` dan `DoctorInCharge` dihapus dari dataset karena tidak memberikan kontribusi informasi terhadap proses klasifikasi dan berpotensi menyebabkan kebocoran data atau noise.
+- Kolom `PatientID` dan `DoctorInCharge` dihapus dari dataset karena tidak memberikan kontribusi informasi terhadap proses klasifikasi dan berpotensi menyebabkan kebocoran data atau noise.
 ### 4. Standardisasi Data
-Standardisasi dilakukan dengan StandardScaler dari scikit-learn untuk memastikan fitur memiliki skala yang sama, untuk memastikan setiap fitur memiliki mean 0 dan standar deviasi 1 dan itu dilakukan sangat penting bagi model terutama untuk model SVM dan MLP.
+- Standardisasi dilakukan dengan StandardScaler dari scikit-learn untuk memastikan fitur memiliki skala yang sama, untuk memastikan setiap fitur memiliki mean 0 dan standar deviasi 1 dan itu dilakukan sangat penting bagi model terutama untuk model SVM dan MLP.
 ```
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 ```
 ### 5. Encoding Data
-tidak dilakukan encoding data dikarenakan setiap fitur sudah berupa data numerik sehingga encoding tidak dilakukan.
+- Tidak dilakukan encoding data dikarenakan setiap fitur sudah berupa data numerik sehingga encoding tidak dilakukan.
 
 ### 6. Split Dataset
 Dataset dibagi menjadi 2 dengan perbandingan 80:20 :
@@ -120,8 +121,8 @@ menggunakan kode:
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 ---
-## Modeling
-### Model 1: Support Vector Machine (SVM)
+## **Modeling**
+### **Model 1: Support Vector Machine (SVM)**
 - **Cara Kerja**: Support Vector Machine bekerja dengan mencari hyperplane terbaik yang memisahkan dua kelas data dengan margin maksimum. Dalam kasus dengan kernel linear, model berusaha mencari garis lurus yang memisahkan data pada ruang berdimensi tinggi.
 - **Parameter**:
   - `C=1.0`: Parameter regularisasi default yang mengontrol trade-off antara margin maksimum dan kesalahan klasifikasi. Nilai lebih kecil memberikan margin lebih besar dengan toleransi error lebih tinggi.
@@ -133,7 +134,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 ### **Model 2: Random Forest**
 - **Cara Kerja:** Random Forest adalah metode ensemble learning yang membangun banyak decision tree dari subset acak data dan fitur, kemudian menggabungkan hasil prediksi dari seluruh tree melalui voting untuk klasifikasi.
 - **Parameter:**
-  - `random_state=42`: Parameter untuk memastikan hasil reproduktif. Parameter lain menggunakan default:
+  - `random_state=42`: Parameter untuk memastikan hasil reproduktif. 
   - `n_estimators=100`: Jumlah pohon dalam hutan.
   - `max_depth=None`: Tanpa batasan kedalaman pohon.
   - `min_samples_split=2`,Minimum sampel untuk membagi node.
@@ -202,34 +203,56 @@ Setiap model dievaluasi menggunakan hasil dari `classification_report` dan `conf
 model terbaik adalah XGBoost karena model tersebut memiliki metrik evaluasi yang sangat tinggi dibandingkan dengan model lain.
 
 ---
-### Hubungan dengan understanding
-Problem 1: "Bagaimana cara mengklasifikasikan apakah seorang pasien memiliki penyakit Alzheimer berdasarkan data medis?"
+### Kesesuaian Tujuan Business
+**Problem 1: "Bagaimana cara mengklasifikasikan apakah seorang pasien memiliki penyakit Alzheimer berdasarkan data medis?"**
 
-✔ Sudah dijawab.
-Model SVC, Random Forest, XGBoost, dan MLP digunakan untuk membuat prediksi berdasarkan data medis. Evaluasi model dilakukan dengan metrik seperti akurasi, precision, recall, dan F1-score.
+- Model SVC, Random Forest, XGBoost, dan MLP digunakan untuk membuat prediksi berdasarkan data medis. Evaluasi model dilakukan dengan metrik seperti akurasi, precision, recall, dan F1-score.
 
-Problem 2: "Fitur atau variabel apa saja yang paling berpengaruh terhadap diagnosis Alzheimer?"
-✔ semua fitur berpengaruh terhadap diagnosis alzheimer kecuali PatientID dan DoctorInchange.
-
----
-
-Goal 1: Membangun model klasifikasi dengan akurasi tinggi
-✔ Tercapai.
-Model telah dilatih dan dievaluasi. Beberapa model (khususnya Random Forest dan XGBoost) sering kali memberikan performa tinggi dalam tugas klasifikasi medis, dan laporan classification report menunjukkan hal ini.
-
-Goal 2: Mengidentifikasi fitur penting sebagai indikator utama Alzheimer
-✔ tercapai.
-Meskipun kamu menggunakan model yang bisa mengevaluasi feature importance, file ini belum secara eksplisit menampilkan grafik atau tabel importance.
+**Problem 2: "Fitur atau variabel apa saja yang paling berpengaruh terhadap diagnosis Alzheimer?"**
+- semua fitur berpengaruh terhadap diagnosis alzheimer kecuali fitur PatientID dan DoctorInchange dikarenakan tidak pengaruh signifikan terhadap prediksi pada diagnosa Alzheimer.
 
 ---
-Solusi 1: Menerapkan dan membandingkan beberapa algoritma ML (SVC, Random Forest, XGBoost, MLP)
-✔ Terealisasi dan berdampak. Evaluasi model menunjukkan bahwa kamu membandingkan performa keempat model secara menyeluruh.
 
-Solusi 2: optimasi model dengan  hyperparameter tuning
-✔ Terealisasi. Dari kode yang terlihat, model seperti Random Forest dan XGBoost diatur dengan parameter khusus, menandakan telah dilakukan tuning. Ada dua versi pelatihan (default dan tuned), yang mendukung pernyataan ini.
+**Goal 1: Membangun model klasifikasi dengan akurasi tinggi**
+- Model telah dilatih dan dievaluasi. Beberapa model (khususnya Random Forest dan XGBoost) sering kali memberikan performa tinggi:
+  - XGBoost:95%
+  - RandomForest:94% 
 
-Solusi 3: Menggunakan metrik evaluasi (akurasi, precision, recall, F1-score)
-✔ Terlaksana sepenuhnya. Semua metrik ini digunakan dalam evaluasi model.
+**Goal 2: Mengidentifikasi fitur penting sebagai indikator utama Alzheimer**
+- beberapa model dapat mengindetifikasi fitur penting sebagai indikator utama seperti Random Forest,XGBoost,dan SVM.
+
+---
+**Solusi 1: Menerapkan dan membandingkan beberapa algoritma ML (SVC, Random Forest, XGBoost, MLP)**
+- dilakukan perbandingan pada beberapa algoritma sehingga hasil setiap algoritma sebagai perikut:
+  - **SVC:**
+    - Accuracy:82%
+    - Precision:77%
+    - Recall:69%
+    - F1-Score:73%
+   
+  - **Random Forest:**
+    - Accuracy:94%
+    - Precision:95%
+    - Recall:87%
+    - F1-Score:91%
+
+  - **XGBoost**
+    - Accuracy:95%
+    - Precision:95%
+    - Recall:91%
+    - F1-Score:93%
+   
+  - **Multi Layer Perceptron:**
+    - Accuracy:80%
+    - Precision:74%
+    - Recall:69%
+    - F1-Score:71%
+
+**Solusi 2: optimasi model dengan  hyperparameter tuning**
+- model seperti Random Forest dan XGBoost sudah diatur dengan parameter khusus, menandakan telah dilakukan tuning. Ada dua versi pelatihan (default dan tuned), yang mendukung pernyataan ini.
+
+**Solusi 3: Menggunakan metrik evaluasi (akurasi, precision, recall, F1-score)**
+- Semua metrik ini sudah digunakan dalam evaluasi model.
 
 ---
 ## Kesimpulan
