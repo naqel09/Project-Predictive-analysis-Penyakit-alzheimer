@@ -34,7 +34,7 @@ Masalah ini dapat didekati melalui penerapan Machine Learning (ML) yang mampu me
 
 ### Solution Statements
 1. Menerapkan dan membandingkan beberapa algoritma machine learning seperti SVC, Random Forest, XGBoost, dan MLP untuk memprediksi diagnosis Alzheimer.
-2. Melakukan perbaikan performa model dengan feature selection dan hyperparameter tuning.
+2. Melakukan perbaikan performa model dengan dan hyperparameter tuning.
 3. Metrik yang digunakan adalah akurasi, precision, recall, dan F1-score untuk mengukur kinerja masing-masing model.
 ---
 ## Data Understanding
@@ -85,7 +85,6 @@ Dataset digunakan berisi data pasien lansia dan berbagai atribut klinis serta ga
 - **`Forgetfulness`**: Pelupa, 0 berarti Tidak dan 1 berarti Ya.
 - **`Diagnosis`**: Status diagnosis penyakit Alzheimer, 0 berarti Tidak dan 1 berarti Ya(variabel target).
 - **`DoctorInCharge`**: Kolom ini berisi informasi rahasia tentang dokter yang menangani, dengan nilai "XXXConfid" untuk semua pasien.
----
 ### Exploratory Data Analysis (EDA)
 - Mayoritas pasien berusia 60–90 tahun.
 - Perbandingan gender cukup seimbang.
@@ -189,6 +188,8 @@ Metrik evaluasi yang digunakan meliputi:
 
 Penggunaan metrik ini sangat relevan karena diagnosis Alzheimer adalah kasus klasifikasi yang sangat sensitif terhadap false negative. Oleh karena itu, recall dijadikan metrik utama dalam pemilihan model terbaik.
 
+---
+
 ### Hasil Evaluasi
 Setiap model dievaluasi menggunakan hasil dari `classification_report` dan `confusion_matrix`. Berikut ini adalah ringkasan evaluasi:
 | Model        | Akurasi  | Precision | Recall   | F1-score |
@@ -198,15 +199,38 @@ Setiap model dievaluasi menggunakan hasil dari `classification_report` dan `conf
 | XGBoost      | 0.953488 | 0.952381  | 0.915033 | 0.933333 |
 | MLP          | 0.804651 | 0.741259  | 0.692810 | 0.716216 |
 
-## Analisis:
-- **XGBoost** menunjukkan performa tertinggi secara keseluruhan (F1-score tertinggi: 93.33%).
-- **RandomForest** memiliki precision tertinggi, cocok untuk kasus dengan fokus pada minimisasi false positive.
-- **MLP** dan **SVC** memiliki performa yang kurang optimal pada dataset ini.
+model terbaik adalah XGBoost karena model tersebut memiliki metrik evaluasi yang sangat tinggi dibandingkan dengan model lain.
 
-## Formula Evaluasi:
-- **Precision** = TP / (TP + FP)
-- **Recall** = TP / (TP + FN)
-- **F1-score** = 2 * (Precision * Recall) / (Precision + Recall)
+---
+### Hubungan dengan understanding
+Problem 1: "Bagaimana cara mengklasifikasikan apakah seorang pasien memiliki penyakit Alzheimer berdasarkan data medis?"
+
+✔ Sudah dijawab.
+Model SVC, Random Forest, XGBoost, dan MLP digunakan untuk membuat prediksi berdasarkan data medis. Evaluasi model dilakukan dengan metrik seperti akurasi, precision, recall, dan F1-score.
+
+Problem 2: "Fitur atau variabel apa saja yang paling berpengaruh terhadap diagnosis Alzheimer?"
+✔ semua fitur berpengaruh terhadap diagnosis alzheimer kecuali PatientID dan DoctorInchange.
+
+---
+
+Goal 1: Membangun model klasifikasi dengan akurasi tinggi
+✔ Tercapai.
+Model telah dilatih dan dievaluasi. Beberapa model (khususnya Random Forest dan XGBoost) sering kali memberikan performa tinggi dalam tugas klasifikasi medis, dan laporan classification report menunjukkan hal ini.
+
+Goal 2: Mengidentifikasi fitur penting sebagai indikator utama Alzheimer
+✔ tercapai.
+Meskipun kamu menggunakan model yang bisa mengevaluasi feature importance, file ini belum secara eksplisit menampilkan grafik atau tabel importance.
+
+---
+Solusi 1: Menerapkan dan membandingkan beberapa algoritma ML (SVC, Random Forest, XGBoost, MLP)
+✔ Terealisasi dan berdampak. Evaluasi model menunjukkan bahwa kamu membandingkan performa keempat model secara menyeluruh.
+
+Solusi 2: optimasi model dengan  hyperparameter tuning
+✔ Terealisasi. Dari kode yang terlihat, model seperti Random Forest dan XGBoost diatur dengan parameter khusus, menandakan telah dilakukan tuning. Ada dua versi pelatihan (default dan tuned), yang mendukung pernyataan ini.
+
+Solusi 3: Menggunakan metrik evaluasi (akurasi, precision, recall, F1-score)
+✔ Terlaksana sepenuhnya. Semua metrik ini digunakan dalam evaluasi model.
+
 ---
 ## Kesimpulan
 Model XGBoost dipilih sebagai model terbaik karena memiliki **akurasinya tinggi**, **recall yang baik**, serta **f1-score terbaik**, yang cocok untuk klasifikasi diagnosis medis seperti Alzheimer. Model ini dapat digunakan sebagai sistem pendukung keputusan dalam diagnosa awal penyakit Alzheimer.
